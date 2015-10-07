@@ -40,7 +40,6 @@ class MyStack {
 		int getSize() {return size;}
 		void push(int);
 		void pop();
-		void removeAll();
 };
 
 MyStack::~MyStack() {
@@ -60,24 +59,23 @@ void MyStack::push(int n) {
 }
 
 void MyStack::pop() {
-	if(top!=NULL) {
+	if(size==1) {
+		Node *temp = (Node*) malloc(sizeof(Node));
+		temp = top;
+		top = NULL;
+		free(temp);
+		size = size-1;
+		
+	}
+	else if(top!=NULL) {
 		Node *temp = (Node*) malloc(sizeof(Node));
 		temp = top;
 		top = temp->next;
 		free(temp);
 		size = size-1;
-
-	}
-
-}
-
-void MyStack::removeAll() {
-	if(size>0) {
-		for(int i=MyStack::size;i>0;i--) {
-			MyStack::pop();
-		}
 	}
 }
+
 
 void teamHeader() {
 	cout << "Tugas 1 ALGORITMA DAN STRUKTUR DATA" << endl
@@ -113,11 +111,11 @@ int main() {
 	int t;
 	char c;
 	
-	teamHeader();
-	hanoiHeader();
-	
-	
 	while(true) {
+		
+		system("cls");
+		teamHeader();
+		hanoiHeader();
 
 		for(;;){
 
@@ -146,19 +144,15 @@ int main() {
 
 		hanoi(t,&A,&B,&C);
 
-	//	C.removeAll();
 	
-		for(int i=C.getSize();i>1;i--) {
-			C.pop();
-			
+		for(int i=C.getSize();i>0;i--) {
+			C.pop();	
+			 
 		}
 		
-		cout << C.getVal() << endl << C.getSize();
-		
-		cout << "\nCoba lagi? Tekan X untuk keluar dari program" << endl;
+		cout << "\nTekan apa saja untuk melanjutkan. Masukkan X untuk keluar." << endl;
 		cin >> c;
-		if(toupper(c)=='X') break;	
-	//	if(toupper(getch())=='X') break;
+		if(toupper(c)=='X') break;
 	
 	}
 
